@@ -21,10 +21,7 @@ axiosIntance.interceptors.response.use(
   }
 );
 
-function get(
-  url,
-  { params = {}, accessToken = false, responseType = "json", headers = {} } = {}
-) {
+function get(url,{ params = {}, accessToken = false, responseType = "json", headers = {} } = {}) {
   const authHeaders = {};
 
   if (accessToken) {
@@ -40,10 +37,8 @@ function get(
   }).then((response) => response);
 }
 
-function post(
-  url,
-  { params = {}, body = {}, accessToken = false, headers = {} } = {}
-) {
+function post(url,{ params = {}, body = {}, accessToken = false, headers = {} } = {})
+ {
   const authHeaders = {};
 
   if (accessToken) {

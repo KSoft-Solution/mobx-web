@@ -71,7 +71,7 @@ const Register = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       {...FORM_LAYOUT}
-      className='registerWrapper'
+      className='registerWrtapper'
     >
       <Form.Item
         label="Name"
