@@ -1,18 +1,18 @@
 import axios from "axios";
 import { api } from "./urlConfig";
 
-const axiosIntance = axios.create({
+const axiosInstance = axios.create({
   baseURL: api,
   headers: {
     "Content-type": "application/json",
   },
 });
 
-axiosIntance.interceptors.request.use((req) => {
+axiosInstance.interceptors.request.use((req) => {
   return req;
 });
 
-axiosIntance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (res) => {
     return res;
   },
@@ -21,7 +21,10 @@ axiosIntance.interceptors.response.use(
   }
 );
 
-function get(url,{ params = {}, accessToken = false, responseType = "json", headers = {} } = {}) {
+function get(
+  url,
+  { params = {}, accessToken = false, responseType = "json", headers = {} } = {}
+) {
   const authHeaders = {};
 
   if (accessToken) {
@@ -37,8 +40,10 @@ function get(url,{ params = {}, accessToken = false, responseType = "json", head
   }).then((response) => response);
 }
 
-function post(url,{ params = {}, body = {}, accessToken = false, headers = {} } = {})
- {
+function post(
+  url,
+  { params = {}, body = {}, accessToken = false, headers = {} } = {}
+) {
   const authHeaders = {};
 
   if (accessToken) {
@@ -72,21 +77,18 @@ function put(
     headers: { ...authHeaders, ...headers },
   }).then((response) => response);
 }
-function put(
-  url,
-  { params = {}, body = {}, accessToken = false, headers = {} } = {}
-) {
+
+function remove(url, { params = {}, accessToken = false, headers = {} } = {}) {
   const authHeaders = {};
 
   if (accessToken) {
-    authHeaders["Authorization"] = `Bearer ${tokenService.getAccessToken()}`;
+    authHeaders["Authorization"] = `Bearer`;
   }
 
-  return instance({
+  return axiosInstance({
     url,
     params,
-    data: body,
-    method: "put",
+    method: "delete",
     headers: { ...authHeaders, ...headers },
   }).then((response) => response);
 }
